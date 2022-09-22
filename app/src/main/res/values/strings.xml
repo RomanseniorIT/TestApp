@@ -3,4 +3,6 @@
 
     <string name="pretty_cat">Pretty cat :3</string>
     <string name="show_next_btn">Next cat</string>
+    <string name="unknown_error">Something was wrong. Try again!</string>
+    <string name="network_error">Check your internet connection and try again!</string>
 </resources>
