@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.annotation.StringRes
+import androidx.core.view.isVisible
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
@@ -46,6 +47,7 @@ class MainActivity : AppCompatActivity() {
             isFirstResource: Boolean
         ): Boolean {
             binding.btnNextCat.isEnabled = true
+            showProgress(false)
             return false
         }
     }
@@ -64,6 +66,7 @@ class MainActivity : AppCompatActivity() {
     private fun initListeners() {
         binding.btnNextCat.setOnClickListener {
             binding.btnNextCat.isEnabled = false
+            showProgress(true)
             viewModel.getCatImage()
         }
     }
@@ -83,5 +86,11 @@ class MainActivity : AppCompatActivity() {
     private fun onError(@StringRes errorText: Int = R.string.unknown_error) {
         Toast.makeText(this, errorText, Toast.LENGTH_SHORT).show()
         binding.btnNextCat.isEnabled = true
+        showProgress(false)
+    }
+
+    private fun showProgress(show: Boolean) {
+        if (show) binding.btnNextCat.text = null else binding.btnNextCat.text = getString(R.string.show_next_btn)
+        binding.progress.isVisible = show
     }
 }
